@@ -9,13 +9,22 @@ Provide multiple ways to close daily worklog gap when total is below 8 hours.
 - current user context
 
 ## Suggestion Options
-1. Existing in-progress issues:
+1. **In-progress & Recent**:
+   - Find issues in progress updated recently (today/yesterday).
    - Tool: `mcp_mcp-atlassian_jira_search`
-   - JQL: `assignee = currentUser() AND statusCategory = "In Progress" ORDER BY updated DESC`
-2. Recently active issues (fallback):
+   - JQL: `assignee = currentUser() AND statusCategory = "In Progress" AND updated >= -1d ORDER BY updated DESC`
+
+2. **Worked on Today**:
+   - Find issues where user already logged work today (to add more time).
    - Tool: `mcp_mcp-atlassian_jira_search`
-   - JQL: `updated >= -1d AND (assignee = currentUser() OR worklogAuthor = currentUser()) ORDER BY updated DESC`
-3. Create new issue in `TL` and log work:
+   - JQL: `worklogAuthor = currentUser() AND worklogDate >= startOfDay() ORDER BY updated DESC`
+
+3. **Short-term Todos**:
+   - Find assigned issues due soon (e.g. next 3 days) or overdue recently.
+   - Tool: `mcp_mcp-atlassian_jira_search`
+   - JQL: `assignee = currentUser() AND statusCategory != Done AND duedate >= -1d AND duedate <= 3d ORDER BY duedate ASC`
+
+4. **Create new issue in `TL`**:
    - Run `03-create-issue-and-log-work.md`
 
 ## User Interaction

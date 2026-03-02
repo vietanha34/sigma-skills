@@ -31,12 +31,36 @@ The Agent will use its available tools to:
 2. Calculate the total hours.
 3. Suggest "In Progress" issues if you are short of 8 hours.
 
+### Clockwork Compliance Check
+
+Located in `skills/clockwork-compliance-check`.
+
+**Description:**
+Evaluates team timer compliance from Clockwork backend APIs with hybrid policy checks (missing start, missing resume, long idle gap, and end-of-day target hours).
+
+### Clockwork Alert Router
+
+Located in `skills/clockwork-alert-router`.
+
+**Description:**
+Routes compliance violations to Gmail and Jira with cooldown and escalation rules, while preventing duplicate escalations.
+
+### Clockwork Daily Digest
+
+Located in `skills/clockwork-daily-digest`.
+
+**Description:**
+Builds and sends end-of-day compliance digests for members and admins, including violation summary and escalation status.
+
 ## Installation
 
 To install this skill to your agent (e.g., via `npx skills`):
 
 ```bash
 npx skills add <path-to-this-repo>/skills/jira-worklog-review
+npx skills add <path-to-this-repo>/skills/clockwork-compliance-check
+npx skills add <path-to-this-repo>/skills/clockwork-alert-router
+npx skills add <path-to-this-repo>/skills/clockwork-daily-digest
 ```
 
 ## Development
