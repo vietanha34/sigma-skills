@@ -83,6 +83,8 @@ channel="$1"
 lines="$2"
 api_url="http://localhost:9999"
 log_dir="/var/log/sigma-machine"
+sigma_root="/usr/local/sigma/sigma-video-dir"
+tools_dir="$sigma_root/tools"
 
 echo "=== host ==="
 hostname || true
@@ -124,6 +126,14 @@ df -h / || true
 
 echo "=== config-paths ==="
 ls -1 /etc/sigma-machine/config 2>/dev/null || true
+
+echo "=== sigma-tools ==="
+echo "sigma_root=$sigma_root"
+echo "tools_dir=$tools_dir"
+ls -1 "$tools_dir" 2>/dev/null || true
+
+echo "=== sigma-lib-env ==="
+echo "export LD_LIBRARY_PATH=$sigma_root/lib:\$LD_LIBRARY_PATH"
 
 echo "=== log-files ==="
 ls -l "$log_dir" 2>/dev/null | grep -E 'debug|origin|nginx|srs|portal-local|sys|cmd' || true

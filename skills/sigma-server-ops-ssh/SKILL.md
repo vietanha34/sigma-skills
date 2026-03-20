@@ -22,6 +22,7 @@ Use this skill to diagnose `sigma-media-server` by SSHing to the host, querying 
 - Optional `vast-ssh` resolver for host aliases or short-lived sessions.
 - `scripts/resolve_credential.sh` for local credential/session setup.
 - `scripts/collect_sigma_diagnostics.sh` for deterministic bounded collection.
+- Remote helper tools under `/usr/local/sigma/sigma-video-dir/tools` for advanced ffmpeg/input diagnostics.
 
 ## When Not to Use
 
@@ -122,6 +123,7 @@ Use this skill to diagnose `sigma-media-server` by SSHing to the host, querying 
 - Use `now.srs` for ingest/session symptoms.
 - Read `references/log-signals.md` when logs show transport, retry, manifest, or plugin-specific errors.
 - Read `references/error-codes.md` when logs contain `(code: ...)` fields or when you need to map a code to likely input/output/processing/config root cause.
+- Read `references/advanced-tools.md` when API evidence and bounded logs are still not enough, or when you need ffmpeg-level evidence for a specific job/input.
 
 ## Progress API Notes
 

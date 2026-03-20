@@ -39,10 +39,16 @@ Use when a channel is degraded/down, the user asks for root-cause hints, or serv
    - repeated failures under the same bracketed job/session ID in `now.debug`
    - dependency hints in logs such as timeout, connection refused, DNS, permission, missing path
    - config references under `/etc/sigma-machine/config/` if a plugin/path issue is suspected
-7. Rank hypotheses:
+7. If root cause is still unclear, load `references/advanced-tools.md` and use the remote helper tools selectively:
+   - `cmd <jobprefix>` to inspect the exact ffmpeg command and real input/output URLs
+   - `probe <input>` to inspect stream structure and codec details
+   - `pts <input>` to compare first PTS across related inputs
+   - `kf <input>` with timeout/line bounds to inspect keyframe cadence for async issues
+   - `logd` or `log` helpers when raw file paths or rotation handling are inconvenient
+8. Rank hypotheses:
    - H1 most likely + reason
    - H2 fallback + reason
-8. Decide next safe action:
+9. Decide next safe action:
    - widen logs once, compare another host, verify dependency health, inspect path/manifest, escalate.
 
 ## Heuristics
