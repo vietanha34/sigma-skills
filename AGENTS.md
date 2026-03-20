@@ -12,7 +12,7 @@ Unlike traditional script-based skills, the skills in this repository primarily 
 
 ### Directory Structure
 
-```
+```text
 skills/
   {skill-name}/           # kebab-case directory name (e.g., jira-worklog-review)
     SKILL.md              # Required: The skill definition and prompt instructions
@@ -59,16 +59,17 @@ Step-by-step instructions for the Agent to follow.
 
 ### Best Practices
 
-1.  **Leverage MCP**: Prefer using available MCP tools over writing custom scripts. This makes the skill portable, secure, and easier to maintain.
-2.  **Clear Instructions**: Be explicit about which tools to call and in what order.
-3.  **Error Handling**: Instruct the Agent on how to handle missing data or tool failures (e.g., "If the search returns no results, ask the user for clarification").
-4.  **Context Efficiency**: Keep the instructions focused. Don't include unnecessary conversational filler.
+1. **Leverage MCP**: Prefer using available MCP tools over writing custom scripts. This makes the skill portable, secure, and easier to maintain.
+2. **Clear Instructions**: Be explicit about which tools to call and in what order.
+3. **Error Handling**: Instruct the Agent on how to handle missing data or tool failures (e.g., "If the search returns no results, ask the user for clarification").
+4. **Context Efficiency**: Keep the instructions focused. Don't include unnecessary conversational filler.
 
 ## Installation & Usage
 
 To use these skills, they must be installed into the Agent's context.
 
 **Standard Installation:**
+
 ```bash
 npx skills add <path-to-repo>/skills/{skill-name}
 ```

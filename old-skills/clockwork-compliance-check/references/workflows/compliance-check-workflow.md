@@ -1,6 +1,7 @@
 # Compliance Check Workflow
 
 ## Inputs
+
 - `run_type`: `am_start_check` | `pm_resume_check` | `eod_check`
 - `date`: default today (`Asia/Ho_Chi_Minh`)
 - `csv_url`: roster CSV URL (required if roster not embedded)
@@ -8,6 +9,7 @@
 - `gap_threshold_minutes`: default `75`
 
 ## 1) Load roster from CSV URL
+
 1. Resolve `csv_url` from prompt.
 2. If missing, ask user for `csv_url` and stop.
 3. Download file:
@@ -22,6 +24,7 @@
 7. If `active` exists, only keep active users.
 
 ## 2) Pull compliance data from `clockwork mcp`
+
 1. Call `get_all_active_timers` once:
    - arguments: `{}`
    - expected shape:
@@ -38,10 +41,12 @@
 5. Optional: call `search_issues` only when issue-key enrichment is needed.
 
 ## 3) Exclusion check (Calendar)
+
 1. Match leave/out-of-office by `email` (preferred) or configured calendar identity.
 2. If user is out-of-office in the checked window, set `exclusion_reason` and skip violation scoring.
 
 ## 4) Compliance scoring
+
 1. `am_start_check`:
    - no timer started by `09:05` -> `missing_start` (`warning`)
 2. `pm_resume_check`:
@@ -52,7 +57,9 @@
    - longest idle gap `> gap_threshold_minutes` in working windows -> `long_idle_gap` (`warning`)
 
 ## 5) Output
+
 Emit one structured record per member:
+
 - `date`, `timezone`, `run_type`
 - `member`: `displayName`, `accountId`, `email`
 - `status`, `violations`, `metrics`
@@ -61,6 +68,7 @@ Emit one structured record per member:
 - `timer_snapshot_meta`: `total_accounts`, `total_timers`, `cached_at`
 
 ## Failure Handling
+
 - CSV fetch fails: return `roster_fetch_error` with HTTP/tool details.
 - CSV schema invalid: return `invalid_roster_schema` with expected columns.
 - `get_all_active_timers` fails: retry once, fallback to per-user `get_active_timers` only if explicitly allowed.

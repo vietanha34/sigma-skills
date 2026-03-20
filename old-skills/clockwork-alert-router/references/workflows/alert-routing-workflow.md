@@ -1,6 +1,7 @@
 # Alert Routing Workflow
 
 ## Routing Policy
+
 1. `status=compliant`: no action.
 2. `status=warning` and first occurrence:
    - send member reminder email.
@@ -11,6 +12,7 @@
    - create or update Jira escalation issue.
 
 ## Procedure
+
 1. Load compliance records from `clockwork-compliance-check`.
 2. Group by member/date and merge duplicate violations.
 3. Check cooldown and past alerts.

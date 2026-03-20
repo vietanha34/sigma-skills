@@ -3,10 +3,12 @@
 Use this workflow to synchronize options for every existing context of a field using a single target value list.
 
 ## Required Inputs
+
 - `fieldId`
 - `values` (target list, ordered, unique, non-empty strings)
 
 ## Sync Policy
+
 - Non-destructive default:
   - Add missing values.
   - Keep existing values that are still in target list enabled.
@@ -14,6 +16,7 @@ Use this workflow to synchronize options for every existing context of a field u
 - Preserve target order exactly using move/reorder API.
 
 ## Steps
+
 1. Resolve field and validate input list.
    - Default field: `(BU) Project`.
    - Normalize `values`: trim, deduplicate, keep first-seen order.
@@ -41,6 +44,7 @@ Use this workflow to synchronize options for every existing context of a field u
 7. Return consolidated summary.
 
 ## Output Expectations
+
 - Total contexts scanned/updated
 - Contexts skipped (if any) and skip reasons
 - Per-context create/enable/disable/reorder counts

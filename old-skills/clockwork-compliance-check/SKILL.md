@@ -8,10 +8,12 @@ description: Use when running team timer compliance checks with clockwork mcp to
 Use this skill to evaluate timer compliance for a team using `clockwork mcp` (not direct REST endpoints).
 
 Working windows (Asia/Ho_Chi_Minh):
+
 - Morning: 08:30-12:00
 - Afternoon: 13:30-17:00
 
 ## Trigger Phrases
+
 - "run morning timer compliance check"
 - "check who has not started timer"
 - "check who has not resumed after lunch"
@@ -19,6 +21,7 @@ Working windows (Asia/Ho_Chi_Minh):
 - "run end of day timer compliance"
 
 ## Tools
+
 - `clockwork mcp`:
   - `get_all_active_timers` (required, primary for team-wide timer state)
   - `get_active_timers` (optional fallback)
@@ -31,6 +34,7 @@ Working windows (Asia/Ho_Chi_Minh):
 - Jira MCP (`sooperset/mcp-atlassian`, optional): enrichment and escalation context
 
 ## Preconditions
+
 - `clockwork mcp` is configured and reachable.
 - Team roster is fetched from a CSV URL (or provided directly by user).
 - Timezone is fixed to `Asia/Ho_Chi_Minh`.
@@ -39,6 +43,7 @@ Working windows (Asia/Ho_Chi_Minh):
   - Idle gap warning threshold: default `75` minutes
 
 ## Guardrails
+
 - Ask for `csv_url` if not present in prompt.
 - Validate roster schema before running compliance checks.
 - Auto-detect CSV delimiter (`;` or `,`); Atlassian exports commonly use `;`.
@@ -53,11 +58,14 @@ Working windows (Asia/Ho_Chi_Minh):
 - Return machine-readable output for downstream alert routing.
 
 ## Workflow Router
+
 1. Load `references/workflows/compliance-check-workflow.md`.
 2. Output records are the required input for `clockwork-alert-router`.
 
 ## Output Contract
+
 Return JSON-ready records with these fields:
+
 - `date`
 - `timezone`
 - `run_type`
@@ -72,6 +80,7 @@ Return JSON-ready records with these fields:
 - `timer_snapshot_meta`: `total_accounts`, `total_timers`, `cached_at`
 
 ## Failure Handling
+
 - Missing `csv_url`: ask user and stop.
 - CSV download/parse failure: return `roster_fetch_error` or `invalid_roster_schema`.
 - `get_all_active_timers` failure: retry once, fallback to per-user `get_active_timers` only if fallback is explicitly allowed for this run.

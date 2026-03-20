@@ -8,10 +8,12 @@ description: Jira custom field context toolkit for cloning contexts and synchron
 Use this skill to manage Jira custom field contexts and options safely, with a focus on `(BU) Project` by default.
 
 This skill supports two main use cases:
+
 1. Clone one existing context to a new context on a target field.
 2. Update options for all existing contexts of a target field from a provided value list.
 
 ## Trigger Phrases
+
 - "clone context for BU Project"
 - "create one more context for custom field"
 - "sync options across all contexts"
@@ -19,6 +21,7 @@ This skill supports two main use cases:
 - "bulk update options for field contexts"
 
 ## Tools
+
 - Atlassian MCP (discovery/read):
   - `jira_search_fields`
   - `jira_get_field_options`
@@ -33,6 +36,7 @@ This skill supports two main use cases:
 - Local shell tools: `curl`, `jq`
 
 ## Preconditions
+
 - Jira Cloud site and API credentials are available:
   - `JIRA_BASE_URL` or `JIRA_URL` (for example `https://your-domain.atlassian.net`)
   - `JIRA_EMAIL` or `JIRA_USERNAME`
@@ -42,6 +46,7 @@ This skill supports two main use cases:
 - Default field is `(BU) Project`; known id hint is `customfield_10232`, but always verify at runtime.
 
 ## Guardrails
+
 - Read/validate first, then write.
 - Require explicit confirmation before any `POST`/`PUT` write operation.
 - Keep operations idempotent:
@@ -53,6 +58,7 @@ This skill supports two main use cases:
 - Always report exact API step and payload fragment on failure.
 
 ## Workflow Router
+
 1. Resolve field:
    - If user provides field id/name, use it.
    - Otherwise default to `(BU) Project`.
@@ -64,6 +70,7 @@ This skill supports two main use cases:
 4. Render final output with `references/templates/operation-summary-template.md`.
 
 ## Inputs
+
 - `field`: optional, default `(BU) Project`
 - `values`: required for option sync (array of strings)
 - `clone_source_context`: optional for clone flow (id or exact name). If omitted, choose global context with options first.
@@ -71,7 +78,9 @@ This skill supports two main use cases:
 - `projectIds` and `issueTypeIds`: optional context scope controls
 
 ## Minimal Response Contract
+
 Always return:
+
 - `Field`: name + id used.
 - `Operation`: clone-context or sync-options-all-contexts.
 - `Contexts processed`: source/target ids and names.
@@ -79,6 +88,7 @@ Always return:
 - `Result`: success/partial/failed with failed step if any.
 
 ## Failure Handling
+
 - Field not found: show top candidate fields from `jira_search_fields` and ask user to choose.
 - Source context not found: show available contexts and stop.
 - Source context has no options: stop and ask user to select another source context.

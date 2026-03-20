@@ -3,12 +3,14 @@
 Use this workflow to clone one existing context and its full option set into a new context for the same field.
 
 ## Required Inputs
+
 - `fieldId`
 - `sourceContext` (id or exact name, optional if auto-select mode is used)
 - `newContextName`
 - Optional scope: `projectIds`, `issueTypeIds`
 
 ## Steps
+
 1. Resolve and validate field.
    - Default resolution target: `(BU) Project`.
    - Confirm exact `fieldId` before API writes.
@@ -39,6 +41,7 @@ Use this workflow to clone one existing context and its full option set into a n
 9. Return operation summary.
 
 ## Output Expectations
+
 - Source context id/name
 - New context id/name
 - Target scope (global/project ids/issue type ids)

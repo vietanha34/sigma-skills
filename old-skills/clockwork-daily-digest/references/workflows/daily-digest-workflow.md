@@ -1,6 +1,7 @@
 # Daily Digest Workflow
 
 ## Procedure
+
 1. Load EOD compliance records from `clockwork-compliance-check`.
 2. Load action execution log from `clockwork-alert-router`.
 3. Build member-level digest entries:

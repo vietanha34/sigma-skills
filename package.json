@@ -1,0 +1,23 @@
+{
+  "name": "sigma-skills",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky",
+    "lint:fix": "markdownlint --fix '**/*.md' --ignore node_modules"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "packageManager": "pnpm@10.25.0",
+  "devDependencies": {
+    "husky": "^9.1.7",
+    "lint-staged": "^16.4.0",
+    "markdownlint-cli": "^0.48.0"
+  },
+  "lint-staged": {
+    "**/*.md": "markdownlint --fix --ignore node_modules"
+  }
+}
